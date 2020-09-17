@@ -20,7 +20,7 @@ public class LoginToTradeville {
                 data = myReader.nextLine();
             }
             myReader.close();
-            //   data1=data;
+
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
