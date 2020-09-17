@@ -11,9 +11,10 @@ public class LoginToTradeville {
     public static void main(String[] args) {
 
         String data = null;
+        File myObj = new File("C:\\Users\\Radu\\Desktop\\java\\Tradeville.txt");
 
+        if (myObj.exists()){
         try {
-           File myObj = new File("C:\\Users\\Radu\\Desktop\\java\\Tradeville.txt");
             Scanner myReader = new Scanner(myObj);
                while (myReader.hasNextLine()) {
                 data = myReader.nextLine();
@@ -23,6 +24,10 @@ public class LoginToTradeville {
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
+        }
+        }else{
+            System.out.println("Wrong file");
+            return;
         }
         System.setProperty("webdriver.chrome.driver", "/Chromedriver/chromedriver.exe");
 
@@ -38,7 +43,7 @@ public class LoginToTradeville {
         WebElement password = driver.findElement(By.xpath("//*[@id=\"ctl00_phContent_ucComposeLogin_ucLoginStartrade_pnlLoginStartrade\"]/input[2]"));
         password.click();
         password.sendKeys(String.valueOf(data));
-        //password.sendKeys(String.valueOf(data1));
+
 
         driver.findElement(By.xpath("//*[@id=\"ctl00_phContent_ucComposeLogin_ucLoginStartrade_btnLogin\"]")).click();
     }
