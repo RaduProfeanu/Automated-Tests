@@ -7,25 +7,26 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class LoginToTradeville {
+public class VerifyPortfolioValueV2 {
+
     public static void main(String[] args) {
 
         String data = null;
         File myObj = new File("C:\\Users\\Radu\\Desktop\\java\\Tradeville.txt");
 
-        if (myObj.exists()){
-        try {
-            Scanner myReader = new Scanner(myObj);
-               while (myReader.hasNextLine()) {
-                data = myReader.nextLine();
-            }
-            myReader.close();
+        if (myObj.exists()) {
+            try {
+                Scanner myReader = new Scanner(myObj);
+                while (myReader.hasNextLine()) {
+                    data = myReader.nextLine();
+                }
+                myReader.close();
 
-        } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-        }else{
+            } catch (FileNotFoundException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+        } else {
             System.out.println("Wrong file");
             return;
         }
@@ -50,6 +51,14 @@ public class LoginToTradeville {
 
         driver.findElement(By.xpath("//*[@id=\"ctl00_lc_ucLeftMenu_leaf_2_35\"]")).click();
 
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        String folioValue=driver.findElement(By.xpath("//*[@id=\"698524cf-845a-4388-bb13-a6ff2223b7a7\"]/span[1]")).getText();
+
+        System.out.println("valoarea este "+folioValue);
     }
 }

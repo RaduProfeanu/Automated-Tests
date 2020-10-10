@@ -7,6 +7,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import static java.lang.Double.parseDouble;
+
 public class VerifyPortfolioValue {
     public static void main(String[] args) {
 
@@ -58,29 +60,26 @@ public class VerifyPortfolioValue {
 
         driver.manage().window().maximize();
 
-        String folioValue=driver.findElement(By.xpath("//*[@id=\"2027855965\"]/tbody[2]/tr/td[8]")).getText();
-      //  String folioValue=driver.findElement(By.xpath("//*[boolean(number(substring-before(substring-after(@id, \"td[8]\"), \"td[8]\")))]")).getText();
+       String folioValue=driver.findElement(By.cssSelector("td.total")).getText();
+       String moneyLeft=driver.findElement(By.xpath("//*[@id=\"258853670\"]/tbody[1]/tr[6]/td[8]")).getText();
 
-        //*[@id="1576598214"]/tbody[2]/tr/td[8]
-        //  //*[boolean(number(substring-before(substring-after(@id, "td[8]"), "td[8]")))]
-        System.out.println("valoarea este "+folioValue);
+       double folioValue1 = parseDouble(folioValue);
+       double moneyLeft1= parseDouble(moneyLeft);
+
+        System.out.println("valoarea folio este"+folioValue1);
+        System.out.println("cash ul din portofolio"+moneyLeft1);
 
 
-/*     //   WebElement folioValue =driver.findElement(By.xpath("/html/body/form/div[7]/div[2]/div[2]/div[4]/div[3]/div/div/table/tbody/tr[9]/td/span/span[1]"));
-      //  String value = folioValue.getAttribute("43,225.73 RON ");
+      /* List<WebElement> rows = driver.findElements(By.xpath("/html/body/form/div[7]/div[2]/div[2]/div[4]/div[3]/div"));
+        for (WebElement row: rows) {
+            List<WebElement> cells = row.findElements(By.cssSelector("td.data"));
+            for (WebElement cell: cells) {
+                System.out.println(cell.getText());
+            }
+        } */
 
-     //  driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
-       String folioValue = (String) ((JavascriptExecutor) driver).executeScript("return arguments[0].value;",driver.findElement(By.xpath("//*[@id=\\\"e4cdd972-75a8-4e37-803e-42452a3d49c4\\\"]/span[1]")));
 
-       // String folioValue=driver.findElement(By.xpath("//*[@id=\"698524cf-845a-4388-bb13-a6ff2223b7a7\"]/span[1]")).getText();
-
-        System.out.println("valoarea este "+folioValue);*/
 
 
     }

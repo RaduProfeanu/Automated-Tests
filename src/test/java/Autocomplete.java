@@ -3,8 +3,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.concurrent.TimeUnit;
+
 public class Autocomplete {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         System.setProperty("webdriver.chrome.driver","/Chromedriver/chromedriver.exe");
 
         WebDriver driver = new ChromeDriver();
@@ -13,7 +15,8 @@ public class Autocomplete {
 
         WebElement autocomplete= driver.findElement(By.id("autocomplete"));
         autocomplete.sendKeys("1555 Park Vlvs, Palo Alto, CA");
-        Thread.sleep(1000);
+
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         WebElement autocompleteResult = driver.findElement(By.className("pac-item"));
         autocompleteResult.click();

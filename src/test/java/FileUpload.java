@@ -13,12 +13,14 @@ public class FileUpload {
         WebElement importButton = driver.findElement(By.xpath("/html/body/div/form/div/div/span[1]/button"));
         importButton.click();
 
-       // Actions action= new Actions(driver);
-      //  action.sendKeys("D:\\radu's junk\\radu\\realistic dragon.PNG").perform();
 
-          WebElement fileinput=driver.findElement(By.name());
-          fileinput.sendKeys("D:\\radu's junk\\radu\\realistic dragon.PNG");
+       // Actions action= new Actions(driver);   -----version 1
+      //  action.sendKeys("D:\\radu's junk\\radu\\realistic dragon.PNG").perform();---- version 1
+        // Alert alert;  ---- version 2
+       // alert = driver.switchTo().alert().sendKeys("D:\\radu's junk\\radu\\realistic dragon.PNG")
+       // WebElement fileinput=driver.findElement(By.name());  // ----version 3
+       //fileinput.sendKeys("D:\\radu's junk\\radu\\realistic dragon.PNG");
 
-
+      // driver.SwitchTo().Window(driver.WindowHandles.Last());
     }
 }
