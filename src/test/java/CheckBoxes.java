@@ -1,24 +1,31 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class CheckBoxes {
-    public static void main(String[] args) {
 
+    private WebDriver driver;
+
+    @BeforeMethod
+     public void setup(){
         System.setProperty("webdriver.chrome.driver", "/Chromedriver/chromedriver.exe");
-        WebDriver driver= new ChromeDriver();
-
+        driver= new ChromeDriver();
         driver.get("https://formy-project.herokuapp.com/checkbox");
+    }
 
-        WebElement checkbox1=driver.findElement(By.id("checkbox-1"));
-        checkbox1.click();
+    @AfterMethod
+    public void close(){
+        driver.close();
+    }
 
-        WebElement checkbox2=driver.findElement(By.id("checkbox-2"));
-        checkbox2.click();
-
-        WebElement checkbox3=driver.findElement(By.id("checkbox-3"));
-        checkbox3.click();
+    @Test
+    public void checkBoxes(){
+        driver.findElement(By.id("checkbox-1")).click();
+        driver.findElement(By.id("checkbox-2")).click();
+        driver.findElement(By.id("checkbox-3")).click();
 
     }
 }

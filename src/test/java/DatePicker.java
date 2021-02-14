@@ -1,20 +1,32 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class DatePicker {
-    public static void main(String[] args) {
+
+    private WebDriver driver;
+
+    @BeforeMethod
+    public void setup(){
         System.setProperty("webdriver.chrome.driver","/Chromedriver/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
 
         driver.get("https://formy-project.herokuapp.com/datepicker");
-
-        WebElement dateField= driver.findElement(By.id("datepicker"));
-        dateField.sendKeys("03/03/2021");
-        dateField.sendKeys(Keys.RETURN);
-
-
     }
+
+    @AfterMethod
+    public void close(){
+        driver.close();
+    }
+
+    @Test
+    public void datePicker(){
+        driver.findElement(By.id("datepicker")).sendKeys("03/03/2021");
+        driver.findElement(By.id("datepicker")).sendKeys(Keys.RETURN);
+    }
+
 }

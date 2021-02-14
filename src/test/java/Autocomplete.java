@@ -2,25 +2,37 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
 public class Autocomplete {
-    public static void main(String[] args) {
+
+    private WebDriver driver;
+
+    @BeforeTest
+    public void setup(){
         System.setProperty("webdriver.chrome.driver","/Chromedriver/chromedriver.exe");
 
-        WebDriver driver = new ChromeDriver();
+       driver = new ChromeDriver();
 
-        driver.get("https://formy-project.herokuapp.com/autocomplete");
+        driver.navigate().to("https://formy-project.herokuapp.com/autocomplete");
+    }
 
-        WebElement autocomplete= driver.findElement(By.id("autocomplete"));
-        autocomplete.sendKeys("1555 Park Vlvs, Palo Alto, CA");
+    @AfterTest
+    public void driverClose(){
+        driver.close();
+    }
 
+    @Test
+    public void autocomplete(){
+
+        driver.findElement(By.xpath("/html/body/div[1]/form/div/div[1]/input")).sendKeys("1555 Park Vlvs, Palo Alto, CA");
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
         WebElement autocompleteResult = driver.findElement(By.className("pac-item"));
         autocompleteResult.click();
-
-        driver.quit();
     }
+
 }
