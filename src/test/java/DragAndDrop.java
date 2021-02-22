@@ -3,14 +3,29 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class DragAndDrop {
-    public static void main(String[] args) {
+    
+   private WebDriver driver;
 
+    @BeforeMethod
+    public void setup(){
         System.setProperty("webdriver.chrome.driver","/Chromedriver/chromedriver.exe");
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
 
         driver.get("https://formy-project.herokuapp.com/dragdrop");
+    }
+
+    @AfterMethod
+    public void close(){
+        driver.close();
+    }
+
+    @Test
+    public void dragAndDrop(){
 
         WebElement seleniumLoggo =driver.findElement(By.id("image"));
         WebElement box=driver.findElement(By.id("box"));
@@ -19,14 +34,7 @@ public class DragAndDrop {
         actions.dragAndDrop(seleniumLoggo,box).build().perform();
 
         String theText=driver.findElement(By.id("box")).getText();
-        int var=theText.compareTo("Dropped!");
 
-        if (var==0){
-            System.out.println("Success!");
-        }else{
-            System.out.println("Failure!");
-        }
-
-       driver.quit();
+        assert theText.compareTo("Dropped!")==0;
     }
 }
